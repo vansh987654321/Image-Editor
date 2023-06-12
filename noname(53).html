@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Editor</title>
+</head>
+<style type="text/css">
+body
+{background-color:black;}
+.inp
+{
+height:60px;
+width:100%;
+border:none;
+box-shadow:1px 1px 10px gray;
+border-radius:10px;
+}
+img
+{
+height:500px;
+width:500px;
+border:1px solid white;
+background-color:white;
+filter:hue-rotate(30deg);
+}
+.black
+{
+height:50%;
+width:100%;
+background-color:black;
+left:0px;
+position:relative;
+color:white;
+}
+button
+{
+height:30px;
+
+background-color:black;
+border:1px solid black;
+color:white;
+}
+button:hover
+{
+height:30px;
+
+background-color:black;
+border:1px solid white;
+color:white;
+}
+</style>
+<input class="inp"value="/storage/emulated/0/bluetooth/ramderbar.png"id="inp">
+<hr>
+<center>
+<div onclick="img()">
+<img id="img"alt="Image in prosses..">
+</div>
+<hr>
+</center>
+
+<div class="black">
+
+<font color="white"style="float:right"onclick="window.history.farward()"font size="6px">&#x2192</font>
+<font color="white"style="float:right"onclick="back()"font size="6px">&#x2190</font>
+<br><br><hr>
+<button onclick="radius()">Border Radius</button>
+<button onclick="filter()">Filter</button>
+<button onclick="bgcolor()">Background Color</button>
+<button onclick="rotate()"disabled>Rotate</button>
+
+<br><br>
+
+<div style="display:none"id="radius">
+<center>
+Top-Left:<input type="range"id="range1"style="width:80%;"value="0">
+<br>
+Top-Right<input type="range"id="range2"style="width:80%;"value="0">
+<br>
+Bottom-left:<input type="range"id="range3"style="width:80%;"value="0">
+<br>
+Bottom-Right:<input type="range"id="range4"style="width:80%;"value="0">
+</center>
+<br>
+
+
+</div>
+
+<div style="display:none"id="bgcolor">
+<center>
+<h4>Note:This function is then works when the image 'png' or crop.<br><br>
+Chose a color<input type="color"id="clr"style="width:80%;height:30px"value="#f1f1f1">
+</h4>
+</center>
+
+
+</div>
+
+<div id="filterid"style="display:none">
+
+<h6>
+Brightness:<input type="range"id="bright"style="width:40%;height:30%"value="10"><p id="1"style="text-align:center"></p></h4>
+
+<h6>Saturate:<input type="range"id="satu"style="width:40%;height:30%"value="10"><p id="2"style="text-align:center"></p></h4>
+
+<h6>Contrast:<input type="range"id="contra"style="width:40%;height:30%"value="10"><p id="8"style="text-align:center"></p></h4>
+
+<h6>Sepia:<input type="range"id="sepia"style="width:40%;height:30%"value="0"><p id="3"style="text-align:center"></p></h4>
+
+<h6>Grayscale:<input type="range"id="gray"style="width:40%;height:30%"value="0"><p id="4"style="text-align:center"></p></h4>
+
+<h6>Hue-rotate:<input type="range"id="hue"style="width:40%;height:30%"value="0"><p id="5"style="text-align:center"></p></h4>
+
+<h6>Invert:<input type="range"id="invert"style="width:40%;height:30%"value="0"><p id="6"style="text-align:center"></p></h4>
+
+
+
+<h4>Blur:<input type="range"id="blur"style="width:40%;height:30%"value="0"><p id="7"style="text-align:center"></p></h4>
+<br>
+
+</div>
+
+
+
+<script type="text/javascript">
+function filter()
+{
+
+document.getElementById("filterid").style.display="block"
+
+document.getElementById("radius").style.display="none"
+document.getElementById("bgcolor").style.display="none"
+}
+
+
+function filter1()
+{
+imgObj.style.filter="brightness("+document.getElementById("bright").value+2+"%)"
+imgObj.style.filter+="saturate("+document.getElementById("satu").value+1+"%)"
+imgObj.style.filter+="blur("+document.getElementById("blur").value+"px)"
+imgObj.style.filter+="sepia("+document.getElementById("sepia").value+1+"%)"
+imgObj.style.filter+="grayscale("+document.getElementById("gray").value+1+"%)"
+imgObj.style.filter+="hue-rotate("+document.getElementById("hue").value+1+"deg)"
+imgObj.style.filter+="invert("+document.getElementById("invert").value+1+"%)"
+imgObj.style.filter+="contrast("+document.getElementById("contra").value+1+"%)"
+
+document.getElementById("1").innerHTML=document.getElementById("bright").value+"%"
+document.getElementById("2").innerHTML=document.getElementById("satu").value+"%"
+document.getElementById("8").innerHTML=document.getElementById("contra").value+"%"
+document.getElementById("3").innerHTML=document.getElementById("sepia").value+"%"
+document.getElementById("4").innerHTML=document.getElementById("gray").value+"%"
+document.getElementById("5").innerHTML=document.getElementById("hue").value+"%"
+document.getElementById("6").innerHTML=document.getElementById("invert").value+"%"
+document.getElementById("7").innerHTML=document.getElementById("blur").value+"%"
+
+}
+setInterval("filter1()",20)
+
+
+imgObj=document.getElementById("img");
+function bgcolor()
+{
+document.getElementById("filterid").style.display="none"
+document.getElementById("bgcolor").style.display="block"
+document.getElementById("radius").style.display="none"
+}
+function bgcolor1()
+{
+imgObj.style.backgroundColor=document.getElementById("clr").value
+}
+setInterval("bgcolor1()",10)
+function text()
+{
+document.getElementById("txt").style.display="block"
+document.getElementById("radius").style.display="none"
+
+}
+
+
+
+function radi()
+{
+document.getElementById("img").style.borderRadius=document.getElementById("range1").value+"px "+document.getElementById("range2").value+"px "+document.getElementById("range3").value+"px "+document.getElementById("range4").value+"px"
+
+}
+setInterval("radi()",1)
+
+function back()
+{
+window.history.back()
+}
+
+function f1()
+{
+document.getElementById("img").src=document.getElementById("inp").value;
+
+
+}
+
+setInterval("f1()",1000)
+
+function radius()
+{
+document.getElementById("filterid").style.display="none"
+document.getElementById("radius").style.display="block"
+document.getElementById("bgcolor").style.display="none"
+}
+document.getElementById("img").style.color="blue"
+</script>
+
+
+</body>
+</html>
